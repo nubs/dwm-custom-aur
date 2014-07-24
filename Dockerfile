@@ -2,5 +2,9 @@ FROM nubs/arch-build
 
 MAINTAINER Spencer Rinehart <anubis@overthemonkey.com>
 
-RUN sudo pacman --sync --refresh --noconfirm --noprogressbar --quiet
-RUN sudo pacman --sync --noconfirm --noprogressbar --quiet libx11 libxinerama
+USER root
+
+RUN pacman --sync --refresh --noconfirm --noprogressbar --quiet
+RUN pacman --sync --noconfirm --noprogressbar --quiet libx11 libxinerama
+
+USER build
