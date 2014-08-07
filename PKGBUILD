@@ -19,7 +19,7 @@ md5sums=('8bb00d4142259beb11e13473b81c0857'
          '939f403a71b6e85261d09fc3412269ee')
 
 build() {
-  cd $srcdir/$_basepkgname-$pkgver
+  cd $_basepkgname-$pkgver
   cp $srcdir/config.h config.h
   cp $srcdir/bstack.c bstack.c
   sed -i 's/CPPFLAGS =/CPPFLAGS +=/g' config.mk
@@ -31,7 +31,7 @@ build() {
 }
 
 package() {
-  cd $srcdir/$_basepkgname-$pkgver
+  cd $_basepkgname-$pkgver
   make PREFIX=/usr DESTDIR=$pkgdir install
   install -m644 -D LICENSE $pkgdir/usr/share/licenses/$_basepkgname/LICENSE
   install -m644 -D README $pkgdir/usr/share/doc/$_basepkgname/README
