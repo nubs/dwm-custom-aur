@@ -20,18 +20,22 @@ md5sums=('8bb00d4142259beb11e13473b81c0857'
 
 build() {
   cd "${_basepkgname}-${pkgver}"
+
   cp "${srcdir}/config.h" config.h
   cp "${srcdir}/bstack.c" bstack.c
+
   sed -i 's/CPPFLAGS =/CPPFLAGS +=/g' config.mk
   sed -i 's/^CFLAGS = -g/#CFLAGS += -g/g' config.mk
   sed -i 's/^#CFLAGS = -std/CFLAGS += -std/g' config.mk
   sed -i 's/^LDFLAGS = -g/#LDFLAGS += -g/g' config.mk
   sed -i 's/^#LDFLAGS = -s/LDFLAGS += -s/g' config.mk
+
   make X11INC=/usr/include/X11 X11LIB=/usr/lib/X11
 }
 
 package() {
   cd "${_basepkgname}-${pkgver}"
+
   make PREFIX=/usr DESTDIR="${pkgdir}" install
   install -m644 -D LICENSE "${pkgdir}/usr/share/licenses/${_basepkgname}/LICENSE"
   install -m644 -D README "${pkgdir}/usr/share/doc/${_basepkgname}/README"
