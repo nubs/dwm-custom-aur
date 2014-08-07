@@ -18,7 +18,7 @@ md5sums=('8bb00d4142259beb11e13473b81c0857'
          'b031a1054151e06b0119be48fd9b504d'
          '939f403a71b6e85261d09fc3412269ee')
 
-build() {
+prepare() {
   cd "${_basepkgname}-${pkgver}"
 
   cp "${srcdir}/config.h" config.h
@@ -29,6 +29,10 @@ build() {
   sed -i 's/^#CFLAGS = -std/CFLAGS += -std/g' config.mk
   sed -i 's/^LDFLAGS = -g/#LDFLAGS += -g/g' config.mk
   sed -i 's/^#LDFLAGS = -s/LDFLAGS += -s/g' config.mk
+}
+
+build() {
+  cd "${_basepkgname}-${pkgver}"
 
   make X11INC=/usr/include/X11 X11LIB=/usr/lib/X11
 }
